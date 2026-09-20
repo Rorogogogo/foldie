@@ -19,7 +19,7 @@
   "publishConfig": { "access": "public" },
   "scripts": {
     "prepack": "bash scripts/package-npm.sh",
-    "test": "node --test tests/npm.test.cjs"
+    "test": "node --test Tests/npm.test.cjs"
   },
   "keywords": ["macos", "finder", "folder", "icon", "cli"]
 }
