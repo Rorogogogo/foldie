@@ -2,6 +2,24 @@
 
 A small macOS CLI to apply custom images to folder icons in Finder. Written in Swift using AppKit's `NSWorkspace.setIcon`, with no third-party dependencies or background service.
 
+## Install with npm
+
+Requires macOS 13 or later and Node.js 18 or later. The package includes the compiled universal Swift executable for Apple Silicon and Intel; users do not need Swift, Xcode, or an install script.
+
+```sh
+npm install -g https://github.com/Rorogogogo/foldericon/releases/download/v0.1.0/rorogogogo-foldericon-0.1.0.tgz
+foldericon set ~/Projects --image ~/Downloads/icon.png
+foldericon reset ~/Projects
+```
+
+Or run directly:
+
+```sh
+npx --yes --package=https://github.com/Rorogogogo/foldericon/releases/download/v0.1.0/rorogogogo-foldericon-0.1.0.tgz foldericon set ~/Projects --image ~/Downloads/icon.png
+```
+
+The commands above install the npm package directly from GitHub Releases. Publication to the npm registry is pending; once published, the shorter `npm install -g @rorogogogo/foldericon` and `npx @rorogogogo/foldericon ...` commands will also work.
+
 ## Install a release
 
 Download `foldericon-0.1.0-macos-universal.tar.gz` from this repository's GitHub Releases page. It includes Apple Silicon and Intel builds and requires macOS 13 or later.
@@ -70,3 +88,5 @@ Colors, symbols, and icon packs are future additions; this version provides `set
 ```
 
 This runs tests, builds both architectures, ad-hoc signs the universal executable, and writes a tar archive and SHA-256 checksums to `dist/`. Building a universal release requires full Xcode.
+
+For npm, run `npm test` to build, pack, install into a temporary directory, and verify real folder operations through the installed CLI and the npm exec entry point. `npm pack` builds a publishable `.tgz`; `npm publish --access public` builds and publishes the package using your authenticated npm account. Keep the version in `package.json` and the Swift CLI in sync. The npm package has no runtime dependencies and no install-time scripts.

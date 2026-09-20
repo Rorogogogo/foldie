@@ -1,0 +1,25 @@
+{
+  "name": "@rorogogogo/foldericon",
+  "version": "0.1.0",
+  "description": "Customize macOS folder icons in Finder from the command line",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rorogogogo/foldericon.git"
+  },
+  "homepage": "https://github.com/Rorogogogo/foldericon#readme",
+  "bugs": "https://github.com/Rorogogogo/foldericon/issues",
+  "bin": {
+    "foldericon": "bin/foldericon.cjs"
+  },
+  "files": ["bin/foldericon.cjs", "vendor/foldericon", "README.md", "CHANGELOG.md"],
+  "os": ["darwin"],
+  "cpu": ["arm64", "x64"],
+  "engines": { "node": ">=18" },
+  "publishConfig": { "access": "public" },
+  "scripts": {
+    "prepack": "bash scripts/package-npm.sh",
+    "test": "node --test tests/npm.test.cjs"
+  },
+  "keywords": ["macos", "finder", "folder", "icon", "cli"]
+}
