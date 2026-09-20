@@ -3,19 +3,19 @@ import Darwin
 import FolderIconCore
 
 let help = """
-foldericon — Customize folder icons in Finder
+foldie — Customize folder icons in Finder
 
 Usage:
-  foldericon set <folder> [<folder> ...] --image <path>
-  foldericon reset <folder> [<folder> ...]
-  foldericon --help
-  foldericon --version
+  foldie set <folder> [<folder> ...] --image <path>
+  foldie reset <folder> [<folder> ...]
+  foldie --help
+  foldie --version, -v
 
 Examples:
-  foldericon set ~/Projects --image ~/Downloads/icon.png
-  foldericon set ~/Projects ~/Documents --image icon.icns
-  foldericon reset ~/Projects
-  foldericon set --image icon.png -- ./-folder
+  foldie set ~/Projects --image ~/Downloads/icon.png
+  foldie set ~/Projects ~/Documents --image icon.icns
+  foldie reset ~/Projects
+  foldie set --image icon.png -- ./-folder
 
 Use quotes around paths containing spaces. PNG, JPEG, and ICNS are supported.
 The image replaces any existing custom icon. Reset restores the macOS default;
@@ -27,7 +27,7 @@ for folders you own and can write to. macOS may request access to protected loca
 """
 
 func report(_ message: String) {
-    FileHandle.standardError.write(Data("foldericon: \(message)\n".utf8))
+    FileHandle.standardError.write(Data("foldie: \(message)\n".utf8))
 }
 
 do {
@@ -39,7 +39,7 @@ do {
         print(help)
         exit(0)
     case .version:
-        print("foldericon 0.1.0")
+        print("foldie 0.2.0")
         exit(0)
     case let .set(paths, imagePath):
         folders = paths

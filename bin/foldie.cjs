@@ -5,16 +5,16 @@ const { spawnSync } = require('node:child_process');
 const path = require('node:path');
 
 if (process.platform !== 'darwin' || !['arm64', 'x64'].includes(process.arch)) {
-  console.error('foldericon requires macOS 13 or later on Apple Silicon or Intel.');
+  console.error('foldie requires macOS 13 or later on Apple Silicon or Intel.');
   process.exit(1);
 }
 
-const result = spawnSync(path.join(__dirname, '..', 'vendor', 'foldericon'), process.argv.slice(2), {
+const result = spawnSync(path.join(__dirname, '..', 'vendor', 'foldie'), process.argv.slice(2), {
   stdio: 'inherit',
 });
 
 if (result.error) {
-  console.error(`foldericon: Could not launch the bundled executable: ${result.error.message}`);
+  console.error(`foldie: Could not launch the bundled executable: ${result.error.message}`);
   process.exit(1);
 }
 if (result.signal) {

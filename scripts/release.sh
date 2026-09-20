@@ -4,13 +4,13 @@ cd "$(dirname "$0")/.."
 
 swift test
 swift build -c release --arch arm64 --arch x86_64
-binary=".build/apple/Products/Release/foldericon"
+binary=".build/apple/Products/Release/foldie"
 version="$("$binary" --version | awk '{print $2}')"
-name="foldericon-${version}-macos-universal"
+name="foldie-${version}-macos-universal"
 mkdir -p "dist/$name"
-cp "$binary" "dist/$name/foldericon"
-codesign --force --sign - "dist/$name/foldericon"
-codesign --verify --strict "dist/$name/foldericon"
+cp "$binary" "dist/$name/foldie"
+codesign --force --sign - "dist/$name/foldie"
+codesign --verify --strict "dist/$name/foldie"
 cp README.md CHANGELOG.md "dist/$name/"
 COPYFILE_DISABLE=1 tar -czf "dist/$name.tar.gz" -C dist "$name"
 (cd dist && shasum -a 256 "$name.tar.gz" > SHA256SUMS)

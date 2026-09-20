@@ -16,9 +16,9 @@ public enum Command: Equatable {
     public static func parse(_ arguments: [String]) throws -> Command {
         guard let verb = arguments.first else { return .help }
         if arguments == ["--help"] || arguments == ["-h"] { return .help }
-        if arguments == ["--version"] { return .version }
+        if arguments == ["--version"] || arguments == ["-v"] { return .version }
         guard verb == "set" || verb == "reset" else {
-            throw CLIError("Unknown command '\(verb)'. Use 'foldericon --help'.")
+            throw CLIError("Unknown command '\(verb)'. Use 'foldie --help'.")
         }
         var folders: [String] = []
         var image: String?

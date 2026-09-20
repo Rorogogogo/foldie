@@ -10,7 +10,7 @@ const path = require('node:path');
 test('packed npm release installs offline and forwards arguments and exit codes', {
   skip: process.platform !== 'darwin',
 }, () => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'foldericon-npm-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'foldie-npm-'));
   const project = path.resolve(__dirname, '..');
   const invoke = (command, args, expected = 0, cwd = root) => {
     const result = spawnSync(command, args, { cwd, encoding: 'utf8' });
@@ -28,13 +28,14 @@ test('packed npm release installs offline and forwards arguments and exit codes'
     invoke('npm', ['pack', '--pack-destination', root], 0, project);
     const archive = path.join(root, fs.readdirSync(root).find(name => name.endsWith('.tgz')));
     const listing = invoke('tar', ['-tzf', archive]).stdout;
-    assert.match(listing, /package\/vendor\/foldericon/);
+    assert.match(listing, /package\/vendor\/foldie/);
     assert.doesNotMatch(listing, /package\/(?:Sources|Tests|scripts|\.build|tests)\//);
     const prefix = path.join(root, 'install with spaces');
     invoke('npm', ['install', '--global', '--prefix', prefix, '--offline', '--ignore-scripts', '--no-audit', '--no-fund', archive]);
-    const cli = path.join(prefix, 'bin', 'foldericon');
+    const cli = path.join(prefix, 'bin', 'foldie');
     const version = require('../package.json').version;
-    assert.equal(invoke(cli, ['--version']).stdout.trim(), `foldericon ${version}`);
+    assert.equal(invoke(cli, ['--version']).stdout.trim(), `foldie ${version}`);
+    assert.equal(invoke(cli, ['-v']).stdout.trim(), `foldie ${version}`);
     assert.match(invoke(cli, ['--help']).stdout, /Usage:/);
     const folder = path.join(root, 'Folder with spaces');
     fs.mkdirSync(folder);
@@ -53,7 +54,7 @@ test('packed npm release installs offline and forwards arguments and exit codes'
     invoke(cli, ['set', folder, '--image', untouched], 2);
     assert.equal(fs.readFileSync(untouched, 'utf8'), 'unchanged');
     // Exercise the same package through the npx/npm exec entry point.
-    assert.match(invoke('npm', ['exec', '--offline', '--yes', `--package=${archive}`, '--', 'foldericon', '--version']).stdout, /foldericon 0\.1\.0/);
+    assert.match(invoke('npm', ['exec', '--offline', '--yes', `--package=${archive}`, '--', 'foldie', '--version']).stdout, /foldie 0\.2\.0/);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

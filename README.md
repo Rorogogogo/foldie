@@ -1,4 +1,4 @@
-# foldericon
+# Foldie
 
 A small macOS CLI to apply custom images to folder icons in Finder. Written in Swift using AppKit's `NSWorkspace.setIcon`, with no third-party dependencies or background service.
 
@@ -7,28 +7,28 @@ A small macOS CLI to apply custom images to folder icons in Finder. Written in S
 Requires macOS 13 or later and Node.js 18 or later. The package includes the compiled universal Swift executable for Apple Silicon and Intel; users do not need Swift, Xcode, or an install script.
 
 ```sh
-npm install -g https://github.com/Rorogogogo/foldericon/releases/download/v0.1.0/rorogogogo-foldericon-0.1.0.tgz
-foldericon set ~/Projects --image ~/Downloads/icon.png
-foldericon reset ~/Projects
+npm install -g https://github.com/Rorogogogo/foldie/releases/download/v0.2.0/rorogogogo-foldie-0.2.0.tgz
+foldie set ~/Projects --image ~/Downloads/icon.png
+foldie reset ~/Projects
 ```
 
 Or run directly:
 
 ```sh
-npx --yes --package=https://github.com/Rorogogogo/foldericon/releases/download/v0.1.0/rorogogogo-foldericon-0.1.0.tgz foldericon set ~/Projects --image ~/Downloads/icon.png
+npx --yes --package=https://github.com/Rorogogogo/foldie/releases/download/v0.2.0/rorogogogo-foldie-0.2.0.tgz foldie set ~/Projects --image ~/Downloads/icon.png
 ```
 
-The commands above install the npm package directly from GitHub Releases. Publication to the npm registry is pending; once published, the shorter `npm install -g @rorogogogo/foldericon` and `npx @rorogogogo/foldericon ...` commands will also work.
+The commands above install the npm package directly from GitHub Releases. Publication to the npm registry is pending; once published, the shorter `npm install -g @rorogogogo/foldie` and `npx @rorogogogo/foldie ...` commands will also work.
 
 ## Install a release
 
-Download `foldericon-0.1.0-macos-universal.tar.gz` from this repository's GitHub Releases page. It includes Apple Silicon and Intel builds and requires macOS 13 or later.
+Download `foldie-0.2.0-macos-universal.tar.gz` from this repository's GitHub Releases page. It includes Apple Silicon and Intel builds and requires macOS 13 or later.
 
 ```sh
-tar -xzf foldericon-0.1.0-macos-universal.tar.gz
+tar -xzf foldie-0.2.0-macos-universal.tar.gz
 mkdir -p "$HOME/.local/bin"
-cp foldericon-0.1.0-macos-universal/foldericon "$HOME/.local/bin/foldericon"
-"$HOME/.local/bin/foldericon" --version
+cp foldie-0.2.0-macos-universal/foldie "$HOME/.local/bin/foldie"
+"$HOME/.local/bin/foldie" --version
 ```
 
 Add `export PATH="$HOME/.local/bin:$PATH"` to your `~/.zshrc` if that directory is not already on PATH. The release includes `SHA256SUMS`; verify the downloaded archive with `shasum -a 256 -c SHA256SUMS` from the directory containing both files.
@@ -41,14 +41,14 @@ Requires macOS 13 or later and Swift 5.9 or later (Xcode or its Command Line Too
 
 ```sh
 swift build -c release
-.build/release/foldericon --help
+.build/release/foldie --help
 ```
 
 Optionally install the binary in a directory on your PATH:
 
 ```sh
 mkdir -p "$HOME/.local/bin"
-cp .build/release/foldericon "$HOME/.local/bin/foldericon"
+cp .build/release/foldie "$HOME/.local/bin/foldie"
 ```
 
 If needed, add `export PATH="$HOME/.local/bin:$PATH"` to your `~/.zshrc`.
@@ -56,11 +56,11 @@ If needed, add `export PATH="$HOME/.local/bin:$PATH"` to your `~/.zshrc`.
 ## Usage
 
 ```sh
-foldericon set ~/Projects --image ~/Downloads/icon.png
-foldericon set ~/Projects ~/Documents --image icon.icns
-foldericon set "~/My Folder" --image "./my icon.png"
-foldericon reset ~/Projects
-foldericon reset ~/Projects ~/Documents
+foldie set ~/Projects --image ~/Downloads/icon.png
+foldie set ~/Projects ~/Documents --image icon.icns
+foldie set "~/My Folder" --image "./my icon.png"
+foldie reset ~/Projects
+foldie reset ~/Projects ~/Documents
 ```
 
 PNG, JPEG, ICNS, and other image formats readable by AppKit work. Square transparent PNGs are a good starting point. Paths can be absolute, relative, or begin with `~`. Use `--` before folder paths that begin with a dash.
